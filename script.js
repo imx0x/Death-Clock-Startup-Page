@@ -138,10 +138,6 @@ const languageFlags = [
 ];
 
 const RADIUS = 140; // Radius of the circle for flag buttons
-/*
-
-  { code: 'zh-TW', name: 'Chinese (Traditional, Taiwan)', flag: '🇹🇼' },
-*/
 
 // map for default regions based on languageFlags
 const defaultRegions = languageFlags.reduce((map, lang) => {
@@ -227,12 +223,12 @@ function handleBalanceUpdate() {
   lastUpdated.textContent = `Last updated: ${now.toLocaleString()}`;
   
   // Remove currency symbol and commas, then parse the number
-  const amount = parseFloat(balanceAmount.textContent.replace(/[₹,]/g, ''));
+  const amount = parseFloat(balanceAmount.textContent.replace(/[¥,]/g, '')) || 0;
   
-  // Update color based on amount
-  if (amount < 10000) {
+  // Update color based on amount (thresholds in Yen)
+  if (amount < 100000) {
     balanceAmount.style.color = '#ff4d4d'; // Red for low balance
-  } else if (amount >= 10000 && amount <= 50000) {
+  } else if (amount >= 100000 && amount <= 500000) {
     balanceAmount.style.color = '#ffa64d'; // Orange for average balance
   } else {
     balanceAmount.style.color = '#4dff88'; // Green for high balance
@@ -240,20 +236,23 @@ function handleBalanceUpdate() {
   
   localStorage.setItem('balance', balanceAmount.textContent);
   localStorage.setItem('lastUpdated', now.toLocaleString());
+  
+  // Update INR conversion
+  updateInrBalance();
 }
 
 // Load saved balance
 function loadSavedBalance() {
-  const savedBalance = localStorage.getItem('balance') || '₹0.00';
+  const savedBalance = localStorage.getItem('balance') || '¥0.00';
   const savedLastUpdated = localStorage.getItem('lastUpdated');
   
   balanceAmount.textContent = savedBalance;
   
   // Apply color coding on load
-  const amount = parseFloat(savedBalance.replace(/[₹,]/g, ''));
-  if (amount < 10000) {
+  const amount = parseFloat(savedBalance.replace(/[¥,]/g, '')) || 0;
+  if (amount < 100000) {
     balanceAmount.style.color = '#ff4d4d';
-  } else if (amount >= 10000 && amount <= 50000) {
+  } else if (amount >= 100000 && amount <= 500000) {
     balanceAmount.style.color = '#ffa64d';
   } else {
     balanceAmount.style.color = '#4dff88';
@@ -262,20 +261,44 @@ function loadSavedBalance() {
   if (savedLastUpdated) {
     lastUpdated.textContent = `Last updated: ${savedLastUpdated}`;
   }
+  
+  // Update INR conversion on load
+  updateInrBalance();
 }
 
-// Format balance with rupee symbol and commas
+// Format balance with Yen symbol and commas
 function formatBalance(amount) {
-  return '₹' + amount.toLocaleString('en-IN', {
+  return '¥' + amount.toLocaleString('ja-JP', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
 }
 
+// Update INR balance
+function updateInrBalance() {
+  const bankBalanceYenText = balanceAmount.textContent.replace(/[¥,]/g, '');
+  const bankBalanceYen = parseFloat(bankBalanceYenText) || 0;
+
+  fetch('https://api.frankfurter.app/latest?from=JPY&to=INR')
+    .then(response => response.json())
+    .then(data => {
+      const exchangeRate = data.rates.INR;
+      const bankBalanceInr = bankBalanceYen * exchangeRate;
+      document.getElementById('balance-amount-inr').textContent = bankBalanceInr.toLocaleString('en-IN', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching exchange rate:', error);
+      document.getElementById('balance-amount-inr').textContent = 'Conversion failed';
+    });
+}
+
 // Event listeners for balance
 balanceAmount.addEventListener('blur', () => {
   // Format the number when the user finishes editing
-  const amount = parseFloat(balanceAmount.textContent.replace(/[₹,]/g, '')) || 0;
+  const amount = parseFloat(balanceAmount.textContent.replace(/[¥,]/g, '')) || 0;
   balanceAmount.textContent = formatBalance(amount);
   handleBalanceUpdate();
 });
@@ -595,8 +618,6 @@ function showTitle(languageName) {
     titleDisplay.classList.add('language-title');
     titleDisplay.textContent = languageName;  // Update the title with the language name
     languageOptionsContainer.appendChild(titleDisplay);
- 
-  
 }
 function hideTitle() {
   if (titleDisplay) {

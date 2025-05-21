@@ -102,7 +102,8 @@
           <h3>Current Bank Balance</h3>
           <button id="edit-balance" class="edit-btn">Edit</button>
         </div>
-        <div class="balance-amount" contenteditable="true" id="balance-amount">₹0.00</div>
+        <div class="balance-amount" contenteditable="true" id="balance-amount">¥0.00</div>
+        <div class="balance-inr">INR: <span id="balance-amount-inr">Loading...</span></div>
         <div class="last-updated" id="last-updated">Last updated: Never</div>
       </div>
     </div>
@@ -147,12 +148,12 @@
 </div>
 
 <dialog id="language-dialog">
-  <button type="button" id="btn-dialog-close" class="btn-dialog-close" autofocus>&#10005;</button>
+  <button type="button" id="btn-dialog-close" class="btn-dialog-close" autofocus>✕</button>
   <div id="language-options" class="language-options"></div>
 </dialog>
 
 <dialog id="death-year-dialog">
-  <button type="button" id="btn-death-dialog-close" class="btn-dialog-close" autofocus>&#10005;</button>
+  <button type="button" id="btn-death-dialog-close" class="btn-dialog-close" autofocus>✕</button>
   <div class="death-year-input-container">
     <h2>Enter Your Expected Death Year</h2>
     <input type="number" id="death-year" min="2024" max="2100" placeholder="Enter year (2024-2100)">
