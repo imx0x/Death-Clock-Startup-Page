@@ -15,69 +15,8 @@
       <div class="date" id="current-date">Monday, March 6</div>
     </div>
 
-    <div class="search-section">
-      <div class="search-container">
-        <div class="search-engine-select">
-          <button id="search-engine-btn" class="search-engine-btn">
-            <img id="search-engine-icon" src="https://www.google.com/favicon.ico" alt="Search Engine" width="24" height="24">
-            <span class="arrow-down">▼</span>
-          </button>
-          <div class="search-engine-dropdown">
-            <div class="search-engine-option" data-engine="google" data-icon="https://www.google.com/favicon.ico" data-url="https://www.google.com/search?q=">
-              <img src="https://www.google.com/favicon.ico" alt="Google" width="24" height="24">
-              <span>Google</span>
-            </div>
-            <div class="search-engine-option" data-engine="bing" data-icon="https://www.bing.com/favicon.ico" data-url="https://www.bing.com/search?q=">
-              <img src="https://www.bing.com/favicon.ico" alt="Bing" width="24" height="24">
-              <span>Bing</span>
-            </div>
-            <div class="search-engine-option" data-engine="duckduckgo" data-icon="https://duckduckgo.com/favicon.ico" data-url="https://duckduckgo.com/?q=">
-              <img src="https://duckduckgo.com/favicon.ico" alt="DuckDuckGo" width="24" height="24">
-              <span>DuckDuckGo</span>
-            </div>
-            <div class="search-engine-option" data-engine="chatgpt" data-icon="https://chat.openai.com/favicon.ico" data-url="https://chat.openai.com/?q=">
-              <img src="https://chat.openai.com/favicon.ico" alt="ChatGPT" width="24" height="24">
-              <span>ChatGPT</span>
-            </div>
-          </div>
-        </div>
-        <input type="text" id="search-input" placeholder="Type anything and press Enter to search...">
-        <button id="search-button">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
-    </div>
-
-    <div class="quick-links">
-      <h3>Quick Links</h3>
-      <div class="links-grid">
-        <a href="https://youtube.com" class="quick-link" title="Go to YouTube">
-          <img src="https://www.youtube.com/favicon.ico" alt="YouTube">
-          <span class="link-tooltip">YouTube</span>
-        </a>
-        <a href="https://gmail.com" class="quick-link" title="Go to Gmail">
-          <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" alt="Gmail">
-          <span class="link-tooltip">Gmail</span>
-        </a>
-        <a href="https://medium.com" class="quick-link" title="Go to Medium">
-          <img src="https://iili.io/3qfku2I.png" alt="Medium">
-          <span class="link-tooltip">Medium</span>
-        </a>
-        <a href="https://github.com" class="quick-link" title="Go to GitHub">
-          <img src="https://iili.io/3qfvUP4.png" alt="GitHub">
-          <span class="link-tooltip">GitHub</span>
-        </a>
-        <a href="https://notion.so" class="quick-link" title="Go to Notion">
-          <img src="https://www.notion.so/images/favicon.ico" alt="Notion">
-          <span class="link-tooltip">Notion</span>
-        </a>
-        <a href="https://calendar.google.com" class="quick-link" title="Go to Calendar">
-          <img src="https://calendar.google.com/googlecalendar/images/favicon_v2018_256.png" alt="Calendar">
-          <span class="link-tooltip">Calendar</span>
-        </a>
-      </div>
+    <div class="calendar-section">
+      <!-- Calendar will be generated here -->
     </div>
 
     <div class="quote-section">
@@ -86,31 +25,49 @@
         <footer class="quote-author">- Author</footer>
       </blockquote>
     </div>
-   
-    <div class="goal-section">
+
+    <div class="goal-section nanu-goal">
       <div class="goal-header">
-          <h3>Today's Goal :</h3>
+        <h3>Nanu's Today's Goal</h3>
       </div>
       <div class="goal-content">
-          <input type="text" class="goal-input" placeholder="Write your goal here...">
+        <input type="text" class="goal-input" placeholder="Write your goal here...">
+      </div>
+    </div>
+
+    <div class="goal-section rohit-goal">
+      <div class="goal-header">
+        <h3>Rohit's Today's Goal</h3>
+      </div>
+      <div class="goal-content">
+        <input type="text" class="goal-input" placeholder="Write your goal here...">
       </div>
     </div>
 
     <div class="finance-section">
-      <div class="balance-card">
+      <div class="balance-card nanu-balance">
         <div class="balance-header">
-          <h3>Current Bank Balance</h3>
-          <button id="edit-balance" class="edit-btn">Edit</button>
+          <h3>Nanu's Bank Balance (INR)</h3>
+          <button class="edit-btn">Edit</button>
         </div>
-        <div class="balance-amount" contenteditable="true" id="balance-amount">¥0.00</div>
-        <div class="balance-inr">INR: <span id="balance-amount-inr">Loading...</span></div>
-        <div class="last-updated" id="last-updated">Last updated: Never</div>
+        <div class="balance-amount" contenteditable="true">0.00</div>
+        <div class="balance-conversion">JPY: <span class="balance-conversion-jpy">Loading...</span></div>
+        <div class="last-updated">Last updated: Never</div>
+      </div>
+
+      <div class="balance-card rohit-balance">
+        <div class="balance-header">
+          <h3>Rohit's Bank Balance (JPY)</h3>
+          <button class="edit-btn">Edit</button>
+        </div>
+        <div class="balance-amount" contenteditable="true">0.00</div>
+        <div class="balance-conversion">INR: <span class="balance-conversion-inr">Loading...</span></div>
+        <div class="last-updated">Last updated: Never</div>
       </div>
     </div>
   </div>
 
   <div class="right-section">
-    <!-- Clock section -->
     <div class="clock-container">
       <div class="clock-title">
         <span class="title-text">Death Clock</span>
@@ -144,6 +101,37 @@
       </div>
       <div id="countdown-timer" class="countdown-timer"></div>
     </div>
+
+    <div class="photos-section">
+      <div class="photo-card rohit-photo">
+        <h3>Rohit's Photo</h3>
+        <div class="photo-display"></div>
+        <input type="file" accept="image/*" class="photo-upload">
+        <button class="capture-btn">Capture from Webcam</button>
+      </div>
+      </div>
+      <div class="photo-card nanu-photo">
+        <h3>Nanu's Photo</h3>
+        <div class="photo-display"></div>
+        <input type="file" accept="image/*" class="photo-upload">
+        <button class="capture-btn">Capture from Webcam</button>
+      </div>
+    </div>
+
+    <div class="chat-section">
+      <div class="user-select">
+        <label>I am: </label>
+        <select class="user-role">
+          <option value="nanu">Nanu</option>
+          <option value="rohit">Rohit</option>
+        </select>
+      </div>
+      <div class="chat-log"></div>
+      <div class="chat-input">
+        <input type="text" placeholder="Type your message...">
+        <button class="send-btn">Send</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -160,6 +148,30 @@
     <button type="button" id="submit-death-year">Submit</button>
   </div>
 </dialog>
+
+<dialog id="calendar-notes-dialog">
+  <button type="button" class="btn-dialog-close">✕</button>
+  <div class="notes-container">
+    <h2>Notes for <span id="notes-date"></span></h2>
+    <div class="note-input">
+      <label>Nanu's Note (Pink)</label>
+      <textarea class="note-textarea nanu-note"></textarea>
+    </div>
+    <div class="note-input">
+      <label>Rohit's Note (Blue)</label>
+      <textarea class="note-textarea rohit-note"></textarea>
+    </div>
+    <button type="button" id="save-notes">Save</button>
+  </div>
+</dialog>
+
+<dialog id="photo-zoom-dialog">
+  <button type="button" class="btn-dialog-close">✕</button>
+  <img id="zoomed-photo" src="" alt="Zoomed Photo">
+</dialog>
+
+<video id="webcam-video" style="display:none;"></video>
+<canvas id="photo-canvas" style="display:none;"></canvas>
 
 <div class="sound-control">
   <audio id="tick-sound" loop>
